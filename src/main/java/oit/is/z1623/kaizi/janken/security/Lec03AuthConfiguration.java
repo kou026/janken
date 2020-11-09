@@ -25,6 +25,7 @@ public class Lec03AuthConfiguration extends WebSecurityConfigurerAdapter {
     // 開発中は↓の書き方でも良いが，平文でパスワードが保存される
     auth.inMemoryAuthentication().withUser("user1").password(passwordEncoder().encode("pAssw0rd")).roles("USER");
     auth.inMemoryAuthentication().withUser("admin").password(passwordEncoder().encode("pAssw0rd")).roles("ADMIN");
+    auth.inMemoryAuthentication().withUser("梶原").password(passwordEncoder().encode("pAssw0rd")).roles("USER");
   }
 
   @Bean
@@ -46,7 +47,11 @@ public class Lec03AuthConfiguration extends WebSecurityConfigurerAdapter {
     // antMatchers()の他にanyRequest()と書くとあらゆるアクセス先を表現できる
     // authenticated()の代わりにpermitAll()と書くと認証処理が不要であることを示す
     http.authorizeRequests().antMatchers("/lec02/**").authenticated();
+    http.authorizeRequests().antMatchers("/match**").authenticated();
     // http.authorizeRequests().anyRequest().authenticated();
+
+    http.csrf().disable();
+    http.headers().frameOptions().disable();
 
     // Spring Securityの機能を利用してログアウト．ログアウト時は http://localhost:8080/ に戻る
     http.logout().logoutSuccessUrl("/");
