@@ -4,13 +4,13 @@ public class Janken {
   public String result;
 
   public Janken(String hand) {
-    if (hand == "グー") {
+    if (hand == "ぐー") {
       result = "Draw";
     }
-    if (hand == "チョキ") {
+    if (hand == "ちょき") {
       result = "You Lose...";
     }
-    if (hand == "パー") {
+    if (hand == "ぱー") {
       result = "You Win!!";
     }
   }
